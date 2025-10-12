@@ -213,7 +213,15 @@ class HackathonAPI:
         self.app.run(host=host, port=port, debug=True)
 
 
+# Mova a instanciação da classe para o escopo global do módulo
+api_instance = HackathonAPI()
+
+# Crie uma variável 'app' que aponta diretamente para a aplicação Flask.
+# Esta é a convenção que o Gunicorn procura.
+app = api_instance.app
+
+# Mantenha apenas a execução do servidor de desenvolvimento dentro do 'if'
 if __name__ == '__main__':
-    api_instance = HackathonAPI()
-    print("Iniciando o servidor da API da Hackathon na porta 5000...")
-    api_instance.run()
+    print("Iniciando o servidor de DESENVOLVIMENTO da API na porta 5000...")
+    # Note que agora usamos a variável 'app' que já foi criada
+    app.run(host='0.0.0.0', port=5000, debug=True)
