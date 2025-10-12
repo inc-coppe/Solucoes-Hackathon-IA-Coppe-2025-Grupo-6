@@ -2,7 +2,58 @@
 
 ---
 
-## 1 - BigQuery
+## 1 - Streamlit + LLM da AWS
+
+## 📋 Pré-requisitos
+
+- Instale as dependências necessárias:
+
+```bash
+pip install streamlit
+```
+
+## 🚀 Execução
+
+```bash
+streamlit run streamlit_aws_bedrock.py
+```
+
+---
+
+## 2 - LLM da AWS
+
+## 📋 Pré-requisitos
+- AWS CLI: https://awscli.amazonaws.com/AWSCLIV2.msi.
+
+Verificação: Abra um novo Prompt de Comando
+
+```bash
+aws --version
+```
+
+- Instale as dependências necessárias:
+
+```bash
+pip install boto3
+```
+
+- Autentique-se na sua máquina:
+
+As Chaves de acesso podem ser retiradas em https://us-east-1.console.aws.amazon.com/iam/home?region=us-west-2#/users/details/programador-cli?section=security_credentials.
+
+```bash
+aws configure
+```
+
+## 🚀 Execução
+
+```bash
+python aws_bedrock.py
+```
+
+---
+
+## 3 - BigQuery
 
 ## 🎯 Objetivo
 
@@ -11,7 +62,7 @@ O objetivo principal deste script é fornecer um ponto de partida claro e funcio
 ## 📋 Pré-requisitos
 Antes de executar o script, certifique-se de que você possui os seguintes pré-requisitos instalados e configurados:
 
-- Google Cloud SDK: A ferramenta de linha de comando gcloud instalada e configurada em sua máquina. Você pode instalá-la a partir deste link (https://cloud.google.com/sdk/docs/install).
+- Google Cloud SDK: A ferramenta de linha de comando gcloud instalada e configurada em sua máquina. Você pode instalá-la a partir deste link (https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe?hl=pt-br).
 
 - Instale as dependências necessárias:
 
@@ -28,12 +79,12 @@ gcloud auth application-default login
 ## 🚀 Execução
 
 ```bash
-python consultar_bigquery.py
+python bigquery_consulta.py
 ```
 
 ---
 
-## 2 - API REST
+## 4 - API REST
 
 API REST desenvolvida em **Python** com **Flask** para a Hackathon.  
 Inclui autenticação **JWT** e um endpoint para a tarefa principal.
@@ -53,7 +104,7 @@ pip install Flask PyJWT
 Para iniciar o servidor, execute o comando na raiz do projeto:
 
 ```bash
-python api_main.py
+python api_class.py
 ```
 
 O servidor estará disponível em:  
