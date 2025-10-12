@@ -60,6 +60,8 @@ dado_minerado/
   }
   ```
 
+---
+
 ## 🔐 Autenticação
 
 Gera um token de acesso **JWT** válido por **1 hora**.
