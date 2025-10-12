@@ -3,7 +3,7 @@
 API REST desenvolvida em **Python (Flask)** para análise e filtragem de solicitações de pacientes conforme o script `pacientesE2.py`.  
 Inclui autenticação **JWT**, geração automática de CSV e opção de **filtrar solicitações pendentes** via query string ou JSON.
 
----
+![Fluxograma_API_Hackathon](Fluxograma_API_Hackathon-2025-10-12-144504.png "Fluxograma API Hackathon")
 
 ## 🧩 Pré-requisitos
 
