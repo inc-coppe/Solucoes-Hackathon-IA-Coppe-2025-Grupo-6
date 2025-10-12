@@ -202,6 +202,12 @@ class HackathonAPI:
                 "resultado": registros,
                 "saida_csv": "dado_minerado/pessoas_pacientes.csv"
             }), 200
+            
+        @self.app.route("/healthz", methods=['POST'])
+        def healthz():
+            return jsonify({
+                "status": "ok"
+            }), 200
 
     def run(self, host='0.0.0.0', port=5000):
         self.app.run(host=host, port=port, debug=True)

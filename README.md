@@ -49,6 +49,17 @@ dado_minerado/
 
 ---
 
+## ♥️ Verifica Status
+
+### **POST /healthz**
+
+- **Resposta (200 OK):**
+  ```json
+  {
+      "status": "ok"
+  }
+  ```
+
 ## 🔐 Autenticação
 
 Gera um token de acesso **JWT** válido por **1 hora**.
