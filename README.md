@@ -157,19 +157,25 @@ Se nenhum status for informado, será usado:
 ### 1. Obter Token
 
 ```bash
-curl -X POST http://127.0.0.1:5000/token      -H "Content-Type: application/json"      -d '{"login": "user_hackathon", "senha": "senha123"}'
+curl -X POST http://3.84.225.207/token -H "Content-Type: application/json" -d '{"login": "user_hackathon", "senha": "senha123"}'
 ```
 
 ### 2. Executar a Tarefa (via query string)
 
 ```bash
-curl -X GET "http://127.0.0.1:5000/task?status=SOLICITAÇÃO%20/%20PENDENTE%20/%20REGULADOR"      -H "Authorization: Bearer seu.jwt.token.aqui"
+curl -X POST "http://3.84.225.207/task?status=SOLICITAÇÃO%20/%20PENDENTE%20/%20REGULADOR" -H "Authorization: Bearer COLE_AQUI_A_CHAVE_GERADA"
 ```
 
 ### 3. Executar a Tarefa (via JSON)
 
 ```bash
-curl -X POST http://127.0.0.1:5000/task      -H "Content-Type: application/json"      -H "Authorization: Bearer seu.jwt.token.aqui"      -d '{"status": "SOLICITAÇÃO / PENDENTE / REGULADOR"}'
+curl -X POST "http://3.84.225.207/task -H "Content-Type: application/json" -H "Authorization: Bearer seu.jwt.token.aqui" -d '{"status": "SOLICITAÇÃO / PENDENTE / REGULADOR"}'
+```
+
+### 4. Testar serviço OK
+
+```bash
+curl -X GET "http://3.84.225.207/healthz"
 ```
 
 ---

@@ -203,7 +203,7 @@ class HackathonAPI:
                 "saida_csv": "dado_minerado/pessoas_pacientes.csv"
             }), 200
             
-        @self.app.route("/healthz", methods=['POST'])
+        @self.app.route("/healthz", methods=['GET'])
         def healthz():
             return jsonify({
                 "status": "ok"
