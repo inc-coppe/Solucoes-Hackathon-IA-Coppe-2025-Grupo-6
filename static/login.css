@@ -1,0 +1,160 @@
+/*
+Login GIV - Folha de Estilos
+===================================
+Estilos específicos para a página de login
+*/
+
+/* ===== VARIÁVEIS CSS ===== */
+:root {
+    --primary-color: #003087;
+    --secondary-color: #1b6d8d;
+    --white: #ffffff;
+    --shadow-heavy: 0 20px 60px rgba(0,0,0,0.3);
+    --border-radius-large: 20px;
+    --transition: all 0.3s ease;
+}
+
+/* ===== ESTILOS GERAIS ===== */
+body {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ===== CONTAINER DE LOGIN ===== */
+.login-container {
+    background: var(--white);
+    border-radius: var(--border-radius-large);
+    padding: 50px;
+    box-shadow: var(--shadow-heavy);
+    max-width: 450px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.6s ease;
+}
+
+/* ===== TÍTULO ===== */
+.login-title {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* ===== BOTÃO DE LOGIN ===== */
+.btn-login {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    color: var(--white);
+    border-radius: 25px;
+    transition: var(--transition);
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* ===== FORMULÁRIO ===== */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 48, 135, 0.1);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+/* ===== MENSAGEM DE ERRO ===== */
+.alert-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    animation: shake 0.5s ease;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 576px) {
+    .login-container {
+        padding: 30px 25px;
+        margin: 10px;
+    }
+    
+    .login-title {
+        font-size: 1.6rem;
+    }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* ===== EFEITOS DE HOVER ===== */
+.login-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+}
+
+/* ===== LOADING SPINNER ===== */
+.spinner-border {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 8px;
+}
+
+/* ===== ESTILOS PARA FOCUS VISIBLE ===== */
+.btn-login:focus-visible,
+.form-control:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
