@@ -2,11 +2,13 @@
 # Sistema de análise de dados médicos com visualizações interativas
 
 # Framework web
+Flask
+PyJWT
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 
 # Processamento de dados
-polars==0.20.2
+polars
 pandas==2.1.4
 
 # Visualizações
