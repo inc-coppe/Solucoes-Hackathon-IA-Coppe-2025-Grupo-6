@@ -153,6 +153,9 @@ Thumbs.db
 *.xlsx
 *.xls
 
+# Database folder
+db/
+
 # Model files
 *.pkl
 *.joblib
