@@ -222,3 +222,4 @@ A estrutura atual suporta eficientemente as funcionalidades do dashboard, com ca
 **Versão do sistema**: 2.0.0  
 **Total de registros analisados**: 3.211.552 registros
 
+
