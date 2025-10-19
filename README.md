@@ -50,22 +50,23 @@ python --version
 
 ### **Dependências Principais**
 ```bash
-# API GIV Completa
+# API GIV Completa (FastAPI)
 pip install -r requirements_api_giv.txt
 
-# Dashboard (alternativo)
+# Dashboard Web (FastAPI)
 pip install -r requirements_otimizado.txt
 
-# API Básica (legado)
+# API Básica (Flask - legado)
 pip install -r requirements.txt
 ```
 
 ### **Bibliotecas Principais**
-- **FastAPI** - Framework web moderno
-- **Polars** - Processamento eficiente de dados
+- **FastAPI** - Framework web moderno (API GIV e Dashboard)
+- **Polars** - Processamento eficiente de dados Parquet
 - **Plotly** - Gráficos interativos
-- **Scikit-learn** - Machine Learning
+- **Scikit-learn** - Machine Learning (Random Forest)
 - **PyJWT** - Autenticação JWT
+- **Uvicorn** - Servidor ASGI para FastAPI
 
 ---
 
@@ -89,7 +90,7 @@ GIV_ACCESS_TOKEN_EXPIRE=30
 
 ## 🚀 **Como Executar**
 
-### **1. 🚀 API GIV Completa (Recomendado)**
+### **1. 🚀 API GIV Completa (FastAPI - Recomendado)**
 
 ```bash
 # Executar diretamente
@@ -99,12 +100,13 @@ python api_giv_completa.py
 INICIAR_API_GIV.bat
 ```
 
+**Tecnologia:** FastAPI + Uvicorn  
 **Acesso:**
 - **API**: http://127.0.0.1:8000
 - **Swagger UI**: http://127.0.0.1:8000/docs
 - **ReDoc**: http://127.0.0.1:8000/redoc
 
-### **2. 📊 Dashboard Web**
+### **2. 📊 Dashboard Web (FastAPI)**
 
 ```bash
 # Dashboard otimizado
@@ -114,16 +116,18 @@ python dashboard_final.py
 INICIAR_OTIMIZADO.bat
 ```
 
+**Tecnologia:** FastAPI + Uvicorn  
 **Acesso:**
 - **Dashboard**: http://127.0.0.1:8000
 
-### **3. 🔧 API Básica (Legado)**
+### **3. 🔧 API Básica (Flask - Legado)**
 
 ```bash
-# API Flask básica
+# API Flask básica (versão antiga)
 python app.py
 ```
 
+**Tecnologia:** Flask  
 **Acesso:**
 - **API**: http://127.0.0.1:5000
 
@@ -141,10 +145,10 @@ python app.py
 │   ├── 📄 *.parquet           # Arquivos de dados
 │   └── 📄 DOCUMENTACAO_CAMPOS_TABELAS.md
 ├── 📁 static/                  # 🎨 Arquivos estáticos
-├── 📄 api_giv_completa.py     # 🚀 API REST principal
-├── 📄 dashboard_final.py      # 📊 Dashboard web
+├── 📄 api_giv_completa.py     # 🚀 API REST FastAPI (principal)
+├── 📄 dashboard_final.py      # 📊 Dashboard FastAPI
 ├── 📄 modelo_ml_saude.py      # 🤖 Modelo de ML
-├── 📄 app.py                  # 🔧 API básica (legado)
+├── 📄 app.py                  # 🔧 API Flask (legado)
 ├── 📄 config.env.example      # 🔐 Template de configuração
 └── 📄 *.bat                   # 🚀 Scripts de inicialização
 ```
@@ -179,10 +183,10 @@ python app.py
 
 ## 🧪 **Exemplos de Uso**
 
-### **1. 🔐 Login na API GIV**
+### **1. 🔐 Login na API GIV (FastAPI)**
 
 ```bash
-curl -X POST "http://127.0.0.1:8000/auth/service" \
+curl -X POST "http://127.0.0.1:8000/auth/login" \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "username=admin&password=admin123"
 ```
@@ -280,12 +284,20 @@ Este projeto é de uso interno da **Hackathon IA Coppe 2025** e destina-se a fin
 
 ## 🎯 **Status do Projeto**
 
-- ✅ **API REST Completa** - Implementada e funcionando
-- ✅ **Dashboard Web** - Interface moderna com ML
-- ✅ **Machine Learning** - Modelo treinado e funcional
-- ✅ **Documentação** - Completa e organizada
-- ✅ **Segurança** - Vulnerabilidades corrigidas
+- ✅ **API REST FastAPI** - Implementada e funcionando (13 endpoints)
+- ✅ **Dashboard FastAPI** - Interface moderna com ML integrado
+- ✅ **Machine Learning** - Random Forest treinado e funcional
+- ✅ **Documentação** - Completa e organizada na pasta `docs/`
+- ✅ **Segurança** - Vulnerabilidades corrigidas (GitGuardian)
 - ✅ **Git** - Repositório atualizado e sincronizado
+- ✅ **Flask Legado** - API básica mantida para compatibilidade
+
+### **Tecnologias Principais:**
+- **FastAPI** - Framework web moderno (API principal e Dashboard)
+- **Flask** - Framework legado (API básica)
+- **Polars** - Processamento de dados Parquet
+- **Scikit-learn** - Machine Learning
+- **Uvicorn** - Servidor ASGI para FastAPI
 
 **Versão**: 1.0.2  
 **Última Atualização**: Outubro 2025
