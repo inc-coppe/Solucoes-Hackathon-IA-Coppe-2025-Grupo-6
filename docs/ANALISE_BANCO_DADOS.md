@@ -1,4 +1,4 @@
-# Análise do Banco de Dados - Gestão Inteligente de Vagas (GIV)
+﻿# Análise do Banco de Dados - Gestão Inteligente de Vagas (GIV)
 
 ## 📋 Resumo Executivo
 

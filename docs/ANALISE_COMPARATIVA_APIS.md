@@ -1,4 +1,4 @@
-# 📊 Análise Comparativa: APIs REST do Projeto GIV
+﻿# 📊 Análise Comparativa: APIs REST do Projeto GIV
 
 **Data**: Janeiro 2025  
 **Versão**: 1.0  

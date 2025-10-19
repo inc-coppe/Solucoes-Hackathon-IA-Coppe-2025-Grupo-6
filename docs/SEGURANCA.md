@@ -1,4 +1,4 @@
-# 🔐 Guia de Segurança - API GIV
+﻿# 🔐 Guia de Segurança - API GIV
 
 **Versão**: 1.0.2  
 **Data**: Janeiro 2025  

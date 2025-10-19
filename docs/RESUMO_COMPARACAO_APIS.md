@@ -1,4 +1,4 @@
-# 📊 Resumo Executivo - Comparação de APIs REST
+﻿# 📊 Resumo Executivo - Comparação de APIs REST
 
 **Data**: Janeiro 2025  
 **Projeto**: Gestão Inteligente de Vagas (GIV)  

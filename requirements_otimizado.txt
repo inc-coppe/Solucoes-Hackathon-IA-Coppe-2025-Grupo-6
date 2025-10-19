@@ -1,4 +1,4 @@
-# Gestão Inteligente de Vagas - GIV - Dependências Otimizadas
+﻿# Gestão Inteligente de Vagas - GIV - Dependências Otimizadas
 # Versão consolidada com todas as dependências necessárias
 
 # Framework web principal

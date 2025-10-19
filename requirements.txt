@@ -1,4 +1,4 @@
-# Dashboard Médico - Dependências
+﻿# Dashboard Médico - Dependências
 # Sistema de análise de dados médicos com visualizações interativas
 
 # Framework web

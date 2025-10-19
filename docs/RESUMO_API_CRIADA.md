@@ -1,4 +1,4 @@
-# 📋 Resumo da API REST Criada
+﻿# 📋 Resumo da API REST Criada
 
 **Data**: Janeiro 2025  
 **Projeto**: API REST - Gestão Inteligente de Vagas (GIV)  

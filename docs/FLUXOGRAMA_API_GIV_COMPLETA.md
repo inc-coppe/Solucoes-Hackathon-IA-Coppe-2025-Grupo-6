@@ -1,4 +1,4 @@
-# 🔄 Fluxograma - API REST GIV Completa
+﻿# 🔄 Fluxograma - API REST GIV Completa
 
 **Versão**: 1.0.2  
 **Data**: Janeiro 2025  

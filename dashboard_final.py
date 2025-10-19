@@ -1,4 +1,4 @@
-import polars as pl
+﻿import polars as pl
 import plotly.express as px
 import plotly.graph_objects as go
 from fastapi import FastAPI, Query, Depends, Form, Request, HTTPException, status

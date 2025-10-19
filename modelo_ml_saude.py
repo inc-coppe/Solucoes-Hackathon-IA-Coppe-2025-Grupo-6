@@ -1,4 +1,4 @@
-"""
+﻿"""
 Módulo de Machine Learning para Predição de Agravamentos em Saúde
 ==================================================================
 

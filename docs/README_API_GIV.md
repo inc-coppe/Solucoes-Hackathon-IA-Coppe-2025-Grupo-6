@@ -1,4 +1,4 @@
-# 🏥 API REST - Gestão Inteligente de Vagas (GIV)
+﻿# 🏥 API REST - Gestão Inteligente de Vagas (GIV)
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)

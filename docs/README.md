@@ -1,4 +1,4 @@
-# 📚 Documentação do Projeto GIV
+﻿# 📚 Documentação do Projeto GIV
 
 **Gestão Inteligente de Vagas (GIV)**  
 **Versão**: 1.0.2  

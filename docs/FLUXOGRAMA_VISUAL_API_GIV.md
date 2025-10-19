@@ -1,4 +1,4 @@
-# 🎨 Fluxograma Visual - API GIV Completa
+﻿# 🎨 Fluxograma Visual - API GIV Completa
 
 **Versão**: 1.0.2  
 **Data**: Janeiro 2025

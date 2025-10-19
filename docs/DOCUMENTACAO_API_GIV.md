@@ -1,4 +1,4 @@
-# 🏥 API REST - Gestão Inteligente de Vagas (GIV)
+﻿# 🏥 API REST - Gestão Inteligente de Vagas (GIV)
 
 **Versão**: 1.0.0  
 **Data**: Janeiro 2025  

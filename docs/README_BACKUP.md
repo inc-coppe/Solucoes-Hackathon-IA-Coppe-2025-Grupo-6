@@ -1,4 +1,4 @@
-# 🏥 Gestão Inteligente de Vagas (GIV)
+﻿# 🏥 Gestão Inteligente de Vagas (GIV)
 
 Sistema completo de **gestão hospitalar** com **API REST**, **Dashboard Web** e **Machine Learning** para predição de agravamentos de pacientes.
 
