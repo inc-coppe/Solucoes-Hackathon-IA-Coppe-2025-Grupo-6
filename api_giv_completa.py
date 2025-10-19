@@ -48,9 +48,10 @@ app = FastAPI(
 )
 
 # Configurações
-SECRET_KEY = "chave-secreta-giv-api-2025"
+import os
+SECRET_KEY = os.getenv("GIV_SECRET_KEY", "chave-secreta-padrao-dev")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("GIV_ACCESS_TOKEN_EXPIRE", "30"))
 
 # Usuários válidos
 USUARIOS_VALIDOS = {

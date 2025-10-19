@@ -25,6 +25,21 @@ pip install Flask PyJWT polars
 
 > **Observação:** A biblioteca `polars` é utilizada para o processamento dos arquivos CSV.
 
+## 🔐 **Configuração de Segurança**
+
+**IMPORTANTE**: Configure as variáveis de ambiente antes de executar:
+
+```bash
+# Copie o arquivo de exemplo
+cp config.env.example config.env
+
+# Edite o arquivo config.env e configure suas chaves secretas
+# GIV_SECRET_KEY=sua-chave-secreta-forte-aqui
+# APP_SECRET_KEY=sua-chave-secreta-app-aqui
+```
+
+**⚠️ NUNCA** commite arquivos `.env` ou `config.env` com chaves reais!
+
 ---
 
 ## 🚀 Execução

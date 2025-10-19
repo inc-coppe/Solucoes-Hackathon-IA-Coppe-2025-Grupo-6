@@ -25,6 +25,9 @@
 - **[README_API_GIV.md](./README_API_GIV.md)** - README específico da API GIV
 - **[RESUMO_API_CRIADA.md](./RESUMO_API_CRIADA.md)** - Resumo de todos os arquivos criados
 
+### 🔐 **Segurança**
+- **[SEGURANCA.md](./SEGURANCA.md)** - Guia de segurança e correção do GitGuardian
+
 ---
 
 ## 🎯 **ESTRUTURA DO PROJETO**
