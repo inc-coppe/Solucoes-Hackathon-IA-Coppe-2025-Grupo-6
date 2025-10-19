@@ -300,4 +300,4 @@ Este projeto é de uso interno da **Hackathon IA Coppe 2025** e destina-se a fin
 - **Uvicorn** - Servidor ASGI para FastAPI
 
 **Versão**: 1.0.2  
-**Última Atualização**: Outubro 2025
+**Última Atualização**: Janeiro 2025
