@@ -30,7 +30,9 @@ def token_required(f):
             return jsonify({'message': 'Token não encontrado!'}), 401
 
         try:
-            jwt.decode(token, "chave-fixa-temporaria", algorithms=["HS256"])
+            import os
+            secret_key = os.getenv("APP_SECRET_KEY", "chave-fixa-temporaria")
+            jwt.decode(token, secret_key, algorithms=["HS256"])
         except jwt.ExpiredSignatureError:
             return jsonify({'message': 'Token expirado!'}), 401
         except jwt.InvalidTokenError:
@@ -131,10 +133,12 @@ def get_token():
     senha = auth_data.get('senha')
 
     if login in USERS and USERS[login] == senha:
+        import os
+        secret_key = os.getenv("APP_SECRET_KEY", "chave-fixa-temporaria")
         token = jwt.encode({
             'user': login,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-        }, "chave-fixa-temporaria", algorithm="HS256")
+        }, secret_key, algorithm="HS256")
         return jsonify({'token': token})
 
     return jsonify({"message": "Credenciais inválidas"}), 401

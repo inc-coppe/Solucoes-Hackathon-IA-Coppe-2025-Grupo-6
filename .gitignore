@@ -227,3 +227,14 @@ db/
 *.pkl
 *.joblib
 *.model
+
+# Security and Configuration files
+config.env
+.env
+.env.local
+.env.production
+.env.staging
+*.key
+*.pem
+*.crt
+secrets.json

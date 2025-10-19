@@ -17,6 +17,58 @@ app = FastAPI(title="Gestão Inteligente de Vagas - GIV", version="2.0.0")
 _dados_cache = None
 
 
+def formatar_numero_br(numero):
+    """
+    Formata números no padrão brasileiro:
+    - Ponto para separar milhares
+    - Vírgula para separar decimais
+    """
+    if numero is None:
+        return "0"
+    
+    # Converter para float se for string
+    try:
+        if isinstance(numero, str):
+            numero = float(numero)
+    except (ValueError, TypeError):
+        return str(numero)
+    
+    # Se for inteiro, não mostrar decimais
+    if numero == int(numero):
+        return f"{int(numero):,}".replace(",", ".")
+    else:
+        # Formatar com 1 casa decimal
+        return f"{numero:,.1f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def formatar_moeda_br(valor):
+    """
+    Formata valores monetários no padrão brasileiro:
+    - R$ 1.000,00
+    """
+    if valor is None:
+        return "R$ 0,00"
+    
+    try:
+        if isinstance(valor, str):
+            valor = float(valor)
+    except (ValueError, TypeError):
+        return str(valor)
+    
+    return f"R$ {valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def formatar_template_grafico(texto_template):
+    """
+    Formata templates de gráficos para usar padrão brasileiro
+    Substitui %{value:,} por %{customdata} com formatação brasileira
+    """
+    # Substituir formatações com vírgula por formatação brasileira
+    texto_template = texto_template.replace("%{value:,}", "%{customdata}")
+    texto_template = texto_template.replace("%{text:,}", "%{customdata}")
+    return texto_template
+
+
 def carregar_dados():
     """Carrega os dados da pasta db com cache"""
     global _dados_cache
@@ -368,7 +420,7 @@ async def dashboard(
                             values=valores,
                             marker=dict(colors=cores),
                             textinfo="value+percent",
-                            texttemplate="%{value:,}<br>(%{percent})",
+                            texttemplate=[formatar_numero_br(val) + "<br>(" + f"{val/sum(valores)*100:.1f}".replace(".", ",") + "%)" for val in valores],
                             hole=0.3,  # Donut chart
                             sort=False,  # Não ordenar automaticamente, manter ordem dos dados
                         )
@@ -460,12 +512,12 @@ async def dashboard(
                             marker=dict(color=cores_sem),
                             text=valores_sem,
                             textposition="auto",
-                            texttemplate="%{text:,}",
+                            texttemplate=[formatar_numero_br(val) for val in valores_sem],
                         )
                     ]
                 )
                 fig3.update_layout(
-                    title=f"Sem Agendamento por Risco ({len(df_sem_agend):,} pacientes)",
+                    title=f"Sem Agendamento por Risco ({formatar_numero_br(len(df_sem_agend))} pacientes)",
                     height=400,
                     xaxis_title="Nível de Risco",
                     yaxis_title="Quantidade de Pacientes",
@@ -496,7 +548,7 @@ async def dashboard(
                             ),
                             text=df_status_sem["count"].to_list(),
                             textposition="auto",
-                            texttemplate="%{text:,}",
+                            texttemplate=[formatar_numero_br(val) for val in df_status_sem["count"].to_list()],
                         )
                     ]
                 )
@@ -573,7 +625,7 @@ async def dashboard(
                                 values=valores_esp,
                                 marker=dict(colors=cores_esp),
                                 textinfo="value+percent",
-                                texttemplate="%{value:,}<br>(%{percent})",
+                                texttemplate=[formatar_numero_br(val) + "<br>(" + f"{val/sum(valores_esp)*100:.1f}".replace(".", ",") + "%)" for val in valores_esp],
                                 hole=0.3,  # Donut chart
                                 sort=False,  # Não ordenar automaticamente, manter ordem dos dados
                             )
@@ -618,7 +670,7 @@ async def dashboard(
                                     ),
                                     text=df_esp_status["count"].to_list(),
                                     textposition="auto",
-                                    texttemplate="%{text:,}",
+                                    texttemplate=[formatar_numero_br(val) for val in df_esp_status["count"].to_list()],
                                 )
                             ]
                         )
@@ -656,6 +708,7 @@ async def dashboard(
                                         marker=dict(color="#17a2b8"),
                                         text=df_esp_idade["count"].to_list(),
                                         textposition="auto",
+                                        texttemplate=[formatar_numero_br(val) for val in df_esp_idade["count"].to_list()],
                                     )
                                 ]
                             )
@@ -1104,7 +1157,7 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="kpi-card" onclick="toggleDataSection('geral')" data-table="geral">
                     <i class="fas fa-file-medical kpi-icon"></i>
-                    <div class="kpi-value">{total:,}</div>
+                    <div class="kpi-value">{formatar_numero_br(total)}</div>
                     <div class="kpi-label">Solicitações Filtradas</div>
                     <small class="text-white-50 mt-2 d-block">Clique para ver dados</small>
                 </div>
@@ -1112,7 +1165,7 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="kpi-card" onclick="toggleDataSection('confirmados')" data-table="confirmados">
                     <i class="fas fa-check-circle kpi-icon"></i>
-                    <div class="kpi-value">{taxa_conf:.1f}%</div>
+                    <div class="kpi-value">{formatar_numero_br(taxa_conf)}%</div>
                     <div class="kpi-label">Taxa Confirmação</div>
                     <small class="text-white-50 mt-2 d-block">Clique para ver dados</small>
                 </div>
@@ -1120,7 +1173,7 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="kpi-card" onclick="toggleDataSection('criticos')" data-table="criticos">
                     <i class="fas fa-exclamation-triangle kpi-icon"></i>
-                    <div class="kpi-value">{risco_critico:.1f}%</div>
+                    <div class="kpi-value">{formatar_numero_br(risco_critico)}%</div>
                     <div class="kpi-label">Risco Crítico</div>
                     <small class="text-white-50 mt-2 d-block">Clique para ver dados</small>
                 </div>
@@ -1128,8 +1181,8 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="kpi-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);" onclick="toggleDataSection('sem-agendamento')" data-table="sem-agendamento">
                     <i class="fas fa-calendar-times kpi-icon"></i>
-                    <div class="kpi-value">{sem_agendamento_total:,}</div>
-                    <div class="kpi-label">Sem Agendamento ({sem_agendamento:.1f}%)</div>
+                    <div class="kpi-value">{formatar_numero_br(sem_agendamento_total)}</div>
+                    <div class="kpi-label">Sem Agendamento ({formatar_numero_br(sem_agendamento)}%)</div>
                     <small class="text-white-50 mt-2 d-block">Clique para ver dados</small>
                 </div>
             </div>
@@ -1207,32 +1260,32 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #003087 0%, #764ba2 100%); color: white;">
                     <i class="fas fa-list-alt" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <h3 class="mb-2">{estatisticas_especialidade['total']:,}</h3>
+                    <h3 class="mb-2">{formatar_numero_br(estatisticas_especialidade['total'])}</h3>
                     <p class="mb-0">Total de Solicitações</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white;">
                     <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <h3 class="mb-2">{estatisticas_especialidade['taxa_confirmacao']:.1f}%</h3>
+                    <h3 class="mb-2">{formatar_numero_br(estatisticas_especialidade['taxa_confirmacao'])}%</h3>
                     <p class="mb-0">Taxa de Confirmação</p>
-                    <small>({estatisticas_especialidade['confirmados']:,} confirmados)</small>
+                    <small>({formatar_numero_br(estatisticas_especialidade['confirmados'])} confirmados)</small>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); color: white;">
                     <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <h3 class="mb-2">{estatisticas_especialidade['taxa_critico']:.1f}%</h3>
+                    <h3 class="mb-2">{formatar_numero_br(estatisticas_especialidade['taxa_critico'])}%</h3>
                     <p class="mb-0">Risco Crítico</p>
-                    <small>({estatisticas_especialidade['criticos']:,} pacientes)</small>
+                    <small>({formatar_numero_br(estatisticas_especialidade['criticos'])} pacientes)</small>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white;">
                     <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <h3 class="mb-2">{estatisticas_especialidade['sem_agendamento']:,}</h3>
+                    <h3 class="mb-2">{formatar_numero_br(estatisticas_especialidade['sem_agendamento'])}</h3>
                     <p class="mb-0">Sem Agendamento</p>
-                    <small>({estatisticas_especialidade['taxa_sem_agendamento']:.1f}%)</small>
+                    <small>({formatar_numero_br(estatisticas_especialidade['taxa_sem_agendamento'])}%)</small>
                 </div>
             </div>
         </div>
@@ -1270,7 +1323,7 @@ async def dashboard(
         {f'''
         <div class="alert alert-danger" role="alert">
             <h5 class="alert-heading"><i class="fas fa-calendar-times me-2"></i>Pacientes SEM Agendamento</h5>
-            <p class="mb-0">Atenção: <strong>{sem_agendamento_total:,} pacientes ({sem_agendamento:.1f}%)</strong> não tiveram agendamento marcado.</p>
+            <p class="mb-0">Atenção: <strong>{formatar_numero_br(sem_agendamento_total)} pacientes ({formatar_numero_br(sem_agendamento)}%)</strong> não tiveram agendamento marcado.</p>
         </div>
         
         <!-- Análise Preditiva: O que acontece se nada for feito? -->
@@ -1284,7 +1337,7 @@ async def dashboard(
                 {f"({predicao_sem_agendamento.get('num_arvores', 100)} árvores de decisão)" if predicao_sem_agendamento.get('usa_ml') else ''}
             </p>
             <p class="mb-0">
-                <strong>Projeção:</strong> Impacto estimado se nenhum agendamento for realizado para os {predicao_sem_agendamento['total_sem_agendamento']:,} pacientes sem atendimento.
+                <strong>Projeção:</strong> Impacto estimado se nenhum agendamento for realizado para os {formatar_numero_br(predicao_sem_agendamento['total_sem_agendamento'])} pacientes sem atendimento.
             </p>
         </div>
         
@@ -1296,22 +1349,22 @@ async def dashboard(
                     <h6><i class="fas fa-chart-line me-2"></i>Performance do Modelo de Machine Learning</h6>
                     <div class="row">
                         <div class="col-md-3">
-                            <strong>Acurácia:</strong> {predicao_sem_agendamento.get('modelo_metricas', {}).get('acuracia', 0):.1%}
+                            <strong>Acurácia:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('acuracia', 0))}%
                         </div>
                         <div class="col-md-3">
-                            <strong>Precisão:</strong> {predicao_sem_agendamento.get('modelo_metricas', {}).get('precisao', 0):.1%}
+                            <strong>Precisão:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('precisao', 0))}%
                         </div>
                         <div class="col-md-3">
-                            <strong>Recall:</strong> {predicao_sem_agendamento.get('modelo_metricas', {}).get('recall', 0):.1%}
+                            <strong>Recall:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('recall', 0))}%
                         </div>
                         <div class="col-md-3">
-                            <strong>F1-Score:</strong> {predicao_sem_agendamento.get('modelo_metricas', {}).get('f1_score', 0):.1%}
+                            <strong>F1-Score:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('f1_score', 0))}%
                         </div>
                     </div>
                     <small class="text-muted mt-2 d-block">
                         <i class="fas fa-info-circle me-1"></i>
-                        Modelo treinado com {predicao_sem_agendamento.get('modelo_metricas', {}).get('total_treino', 0):,} amostras | 
-                        Testado com {predicao_sem_agendamento.get('modelo_metricas', {}).get('total_teste', 0):,} amostras
+                        Modelo treinado com {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('total_treino', 0))} amostras | 
+                        Testado com {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('total_teste', 0))} amostras
                     </small>
                 </div>
             </div>
@@ -1324,15 +1377,15 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; border-left: 5px solid #c0392b;">
                     <i class="fas fa-user-injured" style="font-size: 2.5rem; margin-bottom: 10px; opacity: 0.9;"></i>
-                    <h2 class="mb-2">{predicao_sem_agendamento['agravamento_30_dias']:,}</h2>
+                    <h2 class="mb-2">{formatar_numero_br(predicao_sem_agendamento['agravamento_30_dias'])}</h2>
                     <p class="mb-1"><strong>Agravamentos em 30 dias</strong></p>
-                    <small style="opacity: 0.8;">Baseado em {predicao_sem_agendamento.get('alto_risco_ml', 0):,} pacientes de alto risco (ML)</small>
+                    <small style="opacity: 0.8;">Baseado em {formatar_numero_br(predicao_sem_agendamento.get('alto_risco_ml', 0))} pacientes de alto risco (ML)</small>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; border-left: 5px solid #d35400;">
                     <i class="fas fa-bed" style="font-size: 2.5rem; margin-bottom: 10px; opacity: 0.9;"></i>
-                    <h2 class="mb-2">{predicao_sem_agendamento['internacoes_projetadas']:,}</h2>
+                    <h2 class="mb-2">{formatar_numero_br(predicao_sem_agendamento['internacoes_projetadas'])}</h2>
                     <p class="mb-1"><strong>Internações Projetadas</strong></p>
                     <small style="opacity: 0.8;">30% dos agravamentos resultam em internação hospitalar</small>
                 </div>
@@ -1340,7 +1393,7 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; border-left: 5px solid #a93226;">
                     <i class="fas fa-dollar-sign" style="font-size: 2.5rem; margin-bottom: 10px; opacity: 0.9;"></i>
-                    <h2 class="mb-2">R$ {predicao_sem_agendamento['custo_estimado_30_dias']:,.0f}</h2>
+                    <h2 class="mb-2">{formatar_moeda_br(predicao_sem_agendamento['custo_estimado_30_dias'])}</h2>
                     <p class="mb-1"><strong>Custo Estimado (30 dias)</strong></p>
                     <small style="opacity: 0.8;">R$ 5.000/agravamento em média</small>
                 </div>
@@ -1348,7 +1401,7 @@ async def dashboard(
             <div class="col-lg-3 col-md-6 mb-3">
                 <div class="chart-card text-center" style="background: linear-gradient(135deg, #8e44ad 0%, #6c3483 100%); color: white; border-left: 5px solid #5b2c6f;">
                     <i class="fas fa-chart-line" style="font-size: 2.5rem; margin-bottom: 10px; opacity: 0.9;"></i>
-                    <h2 class="mb-2">R$ {predicao_sem_agendamento['custo_estimado_total']:,.0f}</h2>
+                    <h2 class="mb-2">{formatar_moeda_br(predicao_sem_agendamento['custo_estimado_total'])}</h2>
                     <p class="mb-1"><strong>Custo Total Projetado</strong></p>
                     <small style="opacity: 0.8;">Impacto financeiro total estimado em 90 dias</small>
                 </div>
@@ -1362,21 +1415,21 @@ async def dashboard(
                 <div class="col-md-4">
                     <div class="alert alert-danger">
                         <h6><i class="fas fa-calendar-day me-2"></i>30 Dias</h6>
-                        <h3>{predicao_sem_agendamento['agravamento_30_dias']:,} pacientes</h3>
+                        <h3>{formatar_numero_br(predicao_sem_agendamento['agravamento_30_dias'])} pacientes</h3>
                         <p class="mb-0 small">Principalmente riscos <strong>VERMELHO</strong> (80% de chance)</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="alert alert-warning">
                         <h6><i class="fas fa-calendar-week me-2"></i>60 Dias</h6>
-                        <h3>{predicao_sem_agendamento['agravamento_60_dias']:,} pacientes</h3>
+                        <h3>{formatar_numero_br(predicao_sem_agendamento['agravamento_60_dias'])} pacientes</h3>
                         <p class="mb-0 small">Riscos <strong>AMARELO</strong> e <strong>VERDE</strong> (20-50% de chance)</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="alert alert-info">
                         <h6><i class="fas fa-calendar-alt me-2"></i>90 Dias</h6>
-                        <h3>{predicao_sem_agendamento['agravamento_90_dias']:,} pacientes</h3>
+                        <h3>{formatar_numero_br(predicao_sem_agendamento['agravamento_90_dias'])} pacientes</h3>
                         <p class="mb-0 small">Riscos <strong>AZUL</strong> (5% de chance)</p>
                     </div>
                 </div>
@@ -1407,11 +1460,11 @@ async def dashboard(
                             f'''<tr class="{'table-danger' if esp.get('prob_media', esp.get('criticos', 0) / esp['total']) > 0.6 else 'table-warning' if esp.get('prob_media', esp.get('criticos', 0) / esp['total']) > 0.4 else ''}">
                                 <td><strong>{idx + 1}</strong></td>
                                 <td><strong>{esp['procedimento_especialidade']}</strong></td>
-                                <td>{esp['total']:,}</td>
+                                <td>{formatar_numero_br(esp['total'])}</td>
                                 <td>
-                                    {f"{esp.get('prob_media', 0):.1%}" if predicao_sem_agendamento.get('usa_ml') else f"{esp.get('criticos', 0):,}"}
+                                    {f"{formatar_numero_br(esp.get('prob_media', 0))}%" if predicao_sem_agendamento.get('usa_ml') else f"{formatar_numero_br(esp.get('criticos', 0))}"}
                                 </td>
-                                <td>{esp.get('alto_risco_count', esp.get('criticos', 0)):,}</td>
+                                <td>{formatar_numero_br(esp.get('alto_risco_count', esp.get('criticos', 0)))}</td>
                                 <td>
                                     {('<span class="badge bg-danger">🔴 CRÍTICO</span>' if esp.get('prob_media', esp.get('criticos', 0) / esp['total']) > 0.6 else 
                                      '<span class="badge bg-warning text-dark">🟡 ALTO</span>' if esp.get('prob_media', esp.get('criticos', 0) / esp['total']) > 0.4 else 
@@ -1439,9 +1492,9 @@ async def dashboard(
                     <h6 class="text-primary mt-2">🎯 Algoritmo</h6>
                     <ul class="small mb-3">
                         <li><strong>Random Forest Classifier</strong> com 100 árvores de decisão</li>
-                        <li>Treinado com {predicao_sem_agendamento['modelo_metricas']['total_treino']:,} amostras</li>
-                        <li>Validado com {predicao_sem_agendamento['modelo_metricas']['total_teste']:,} amostras</li>
-                        <li>Acurácia: {predicao_sem_agendamento['modelo_metricas']['acuracia']:.1%}</li>
+                        <li>Treinado com {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['total_treino'])} amostras</li>
+                        <li>Validado com {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['total_teste'])} amostras</li>
+                        <li>Acurácia: {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['acuracia'])}%</li>
                     </ul>
                     
                     <h6 class="text-primary">🔍 Features Utilizadas</h6>
@@ -1513,7 +1566,7 @@ async def dashboard(
                 <div class="chart-card">
                     <h5 class="mb-3">
                         <i class="fas fa-table me-2"></i>
-                        Dados Gerais (Exibindo até 5.000 de {total_geral:,} registros)
+                        Dados Gerais (Exibindo até 5.000 de {formatar_numero_br(total_geral)} registros)
                     </h5>
                     <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding: 8px 15px; font-size: 0.9rem;">
                         <i class="fas fa-info-circle me-2"></i>
@@ -1552,7 +1605,7 @@ async def dashboard(
                 <div class="chart-card">
                     <h5 class="mb-3">
                         <i class="fas fa-check-circle me-2"></i>
-                        Pacientes Confirmados (Exibindo até 5.000 de {total_confirmados:,} registros)
+                        Pacientes Confirmados (Exibindo até 5.000 de {formatar_numero_br(total_confirmados)} registros)
                     </h5>
                     <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding: 8px 15px; font-size: 0.9rem;">
                         <i class="fas fa-info-circle me-2"></i>
@@ -1591,7 +1644,7 @@ async def dashboard(
                 <div class="chart-card">
                     <h5 class="mb-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Pacientes com Risco Crítico (Exibindo até 5.000 de {total_criticos:,} registros)
+                        Pacientes com Risco Crítico (Exibindo até 5.000 de {formatar_numero_br(total_criticos)} registros)
                     </h5>
                     <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding: 8px 15px; font-size: 0.9rem;">
                         <i class="fas fa-info-circle me-2"></i>
@@ -1630,7 +1683,7 @@ async def dashboard(
                 <div class="chart-card">
                     <h5 class="mb-3">
                         <i class="fas fa-calendar-times me-2"></i>
-                        Pacientes SEM Agendamento (Exibindo até 5.000 de {total_sem_agendamento:,} registros)
+                        Pacientes SEM Agendamento (Exibindo até 5.000 de {formatar_numero_br(total_sem_agendamento)} registros)
                     </h5>
                     <div class="alert alert-info alert-dismissible fade show" role="alert" style="padding: 8px 15px; font-size: 0.9rem;">
                         <i class="fas fa-info-circle me-2"></i>

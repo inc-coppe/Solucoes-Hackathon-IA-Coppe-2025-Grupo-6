@@ -1,0 +1,46 @@
+﻿# ========================================
+# API REST - Gestão Inteligente de Vagas (GIV)
+# ========================================
+# Arquivo de requisitos para a API REST completa
+# Versão: 1.0.0
+# Data: Janeiro 2025
+
+# ===== FRAMEWORK WEB =====
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+
+# ===== PROCESSAMENTO DE DADOS =====
+polars
+numpy
+pandas
+
+# ===== MACHINE LEARNING =====
+scikit-learn
+joblib==1.3.2
+
+# ===== VISUALIZAÇÃO =====
+plotly==5.17.0
+
+# ===== AUTENTICAÇÃO E SEGURANÇA =====
+PyJWT==2.8.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+
+# ===== UTILITÁRIOS =====
+python-dateutil==2.8.2
+pytz==2023.3
+
+# ===== DESENVOLVIMENTO E TESTES =====
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+
+# ===== DOCUMENTAÇÃO =====
+# FastAPI já inclui Swagger UI e ReDoc
+
+# ===== OPCIONAL - PARA PRODUÇÃO =====
+# gunicorn==21.2.0
+# redis==5.0.1
+# celery==5.3.4
