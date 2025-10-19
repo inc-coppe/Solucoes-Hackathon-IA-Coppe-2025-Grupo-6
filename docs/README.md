@@ -28,6 +28,9 @@
 ### 🔐 **Segurança**
 - **[SEGURANCA.md](./SEGURANCA.md)** - Guia de segurança e correção do GitGuardian
 
+### 📋 **Backups e Histórico**
+- **[README_BACKUP.md](./README_BACKUP.md)** - Backup do README anterior
+
 ---
 
 ## 🎯 **ESTRUTURA DO PROJETO**
