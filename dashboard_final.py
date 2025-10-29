@@ -11,7 +11,7 @@ from modelo_ml_saude import modelo_global
 # Configuração
 USUARIOS_VALIDOS = {"admin": "senha123", "tou": "hackathon"}
 
-app = FastAPI(title="Gestão Inteligente de Vagas - GIV", version="2.0.0")
+app = FastAPI(title="Gestão Inteligente de Vagas - GIV-Saúde", version="2.0.0")
 
 # Cache de dados
 _dados_cache = None
@@ -245,7 +245,7 @@ async def login_form(error: Optional[str] = None):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login - Gestão Inteligente de Vagas - GIV</title>
+        <title>Login - Gestão Inteligente de Vagas - GIV-Saúde-Saúde</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {{
@@ -279,7 +279,7 @@ async def login_form(error: Optional[str] = None):
     </head>
     <body>
         <div class="login-container">
-            <h2 class="login-title text-center">Gestão Inteligente de Vagas - GIV</h2>
+            <h2 class="login-title text-center">Gestão Inteligente de Vagas - GIV-Saúde</h2>
             {error_html}
             <form method="post" action="/login">
                 <div class="mb-3">
@@ -905,7 +905,7 @@ async def dashboard(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão Inteligente de Vagas - GIV</title>
+    <title>Gestão Inteligente de Vagas - GIV-Saúde</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -1138,7 +1138,7 @@ async def dashboard(
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">
                 <i class="fas fa-hospital text-primary"></i>
-                Gestão Inteligente de Vagas - GIV
+                Gestão Inteligente de Vagas - GIV-Saúde
             </span>
             <div>
                 <span class="me-3">

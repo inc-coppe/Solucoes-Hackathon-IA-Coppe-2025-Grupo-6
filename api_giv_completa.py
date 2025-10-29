@@ -1,6 +1,6 @@
 ﻿#!/usr/bin/env python3
 """
-API REST Completa - Gestão Inteligente de Vagas (GIV)
+API REST Completa - Gestão Inteligente de Vagas (GIV-Saúde)
 ====================================================
 
 API REST completa baseada no dashboard_final.py com todas as funcionalidades:
@@ -40,7 +40,7 @@ warnings.filterwarnings('ignore')
 
 # ===== CONFIGURAÇÃO DA APLICAÇÃO =====
 app = FastAPI(
-    title="API REST - Gestão Inteligente de Vagas (GIV)",
+    title="API REST - Gestão Inteligente de Vagas (GIV-Saúde)",
     description="API completa para gestão de vagas hospitalares com Machine Learning",
     version="1.0.2",
     docs_url="/docs",
@@ -408,7 +408,7 @@ async def root():
     return """
     <html>
         <head>
-            <title>API REST - Gestão Inteligente de Vagas (GIV)</title>
+            <title>API REST - Gestão Inteligente de Vagas (GIV-Saúde)</title>
             <style>
                 body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
                 .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -424,7 +424,7 @@ async def root():
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>🏥 API REST - Gestão Inteligente de Vagas (GIV)</h1>
+                    <h1>🏥 API REST - Gestão Inteligente de Vagas (GIV-Saúde)</h1>
                     <p>API completa para gestão de vagas hospitalares com Machine Learning</p>
                 </div>
                 
@@ -526,7 +526,7 @@ async def get_status():
         return {
             "status": "OK",
             "versao": "1.0.0",
-            "nome": "API REST - Gestão Inteligente de Vagas (GIV)",
+            "nome": "API REST - Gestão Inteligente de Vagas (GIV-Saúde)",
             "total_registros": len(df),
             "timestamp": datetime.now().isoformat(),
             "modelo_ml_treinado": modelo_global.treinado,
@@ -964,7 +964,7 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
     
-    print("🚀 Iniciando API REST - Gestão Inteligente de Vagas (GIV)")
+    print("🚀 Iniciando API REST - Gestão Inteligente de Vagas (GIV-Saúde)")
     print("📊 Carregando dados...")
     
     try:

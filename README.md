@@ -1,4 +1,4 @@
-﻿# 🏥 Gestão Inteligente de Vagas (GIV)
+﻿# 🏥 Gestão Inteligente de Vagas (GIV-Saúde)
 
 Sistema completo de **gestão hospitalar** com **API REST**, **Dashboard Web** e **Machine Learning** para predição de agravamentos de pacientes.
 
@@ -11,7 +11,7 @@ Toda a documentação está organizada na pasta **[`docs/`](./docs/README.md)**:
 - 🔄 **Fluxogramas e Arquitetura**
 - 📊 **Análises Comparativas** 
 - 🗄️ **Documentação de Dados**
-- 🚀 **Documentação da API GIV**
+- 🚀 **Documentação da API GIV-Saúde**
 - 🔐 **Segurança**
 
 **👉 [ACESSE A DOCUMENTAÇÃO COMPLETA](./docs/README.md)**
@@ -50,8 +50,8 @@ python --version
 
 ### **Dependências Principais**
 ```bash
-# API GIV Completa (FastAPI)
-pip install -r requirements_api_giv.txt
+# API GIV-Saúde Completa (FastAPI)
+pip install -r requirements_api_GIV-Saúde.txt
 
 # Dashboard Web (FastAPI)
 pip install -r requirements_otimizado.txt
@@ -61,7 +61,7 @@ pip install -r requirements.txt
 ```
 
 ### **Bibliotecas Principais**
-- **FastAPI** - Framework web moderno (API GIV e Dashboard)
+- **FastAPI** - Framework web moderno (API GIV-Saúde e Dashboard)
 - **Polars** - Processamento eficiente de dados Parquet
 - **Plotly** - Gráficos interativos
 - **Scikit-learn** - Machine Learning (Random Forest)
@@ -79,9 +79,9 @@ pip install -r requirements.txt
 cp config.env.example config.env
 
 # Edite o arquivo config.env e configure suas chaves secretas
-GIV_SECRET_KEY=sua-chave-secreta-forte-aqui
+GIV-Saúde_SECRET_KEY=sua-chave-secreta-forte-aqui
 APP_SECRET_KEY=sua-chave-secreta-app-aqui
-GIV_ACCESS_TOKEN_EXPIRE=30
+GIV-Saúde_ACCESS_TOKEN_EXPIRE=30
 ```
 
 **⚠️ NUNCA** commite arquivos `.env` ou `config.env` com chaves reais!
@@ -90,14 +90,14 @@ GIV_ACCESS_TOKEN_EXPIRE=30
 
 ## 🚀 **Como Executar**
 
-### **1. 🚀 API GIV Completa (FastAPI - Recomendado)**
+### **1. 🚀 API GIV-Saúde Completa (FastAPI - Recomendado)**
 
 ```bash
 # Executar diretamente
-python api_giv_completa.py
+python api_GIV-Saúde_completa.py
 
 # Ou usar o script de inicialização
-INICIAR_API_GIV.bat
+INICIAR_API_GIV-Saúde.bat
 ```
 
 **Tecnologia:** FastAPI + Uvicorn  
@@ -136,7 +136,7 @@ python app.py
 ## 📂 **Estrutura do Projeto**
 
 ```
-📁 projeto-giv/
+📁 projeto-GIV-Saúde/
 ├── 📁 docs/                    # 📚 Documentação completa
 │   ├── 📄 README.md           # Índice da documentação
 │   ├── 📄 SEGURANCA.md        # Guia de segurança
@@ -145,7 +145,7 @@ python app.py
 │   ├── 📄 *.parquet           # Arquivos de dados
 │   └── 📄 DOCUMENTACAO_CAMPOS_TABELAS.md
 ├── 📁 static/                  # 🎨 Arquivos estáticos
-├── 📄 api_giv_completa.py     # 🚀 API REST FastAPI (principal)
+├── 📄 api_GIV-Saúde_completa.py     # 🚀 API REST FastAPI (principal)
 ├── 📄 dashboard_final.py      # 📊 Dashboard FastAPI
 ├── 📄 modelo_ml_saude.py      # 🤖 Modelo de ML
 ├── 📄 app.py                  # 🔧 API Flask (legado)
@@ -155,7 +155,7 @@ python app.py
 
 ---
 
-## 🔗 **Endpoints da API GIV**
+## 🔗 **Endpoints da API GIV-Saúde**
 
 ### **🔐 Autenticação**
 - `POST /auth/login` - Login e token JWT
@@ -183,7 +183,7 @@ python app.py
 
 ## 🧪 **Exemplos de Uso**
 
-### **1. 🔐 Login na API GIV (FastAPI)**
+### **1. 🔐 Login na API GIV-Saúde (FastAPI)**
 
 ```bash
 curl -X POST "http://127.0.0.1:8000/auth/login" \
@@ -242,9 +242,9 @@ curl -X POST "http://127.0.0.1:8000/api/v1/ml/predicao" \
 ### **Variáveis de Ambiente**
 ```bash
 # Configurações de segurança
-GIV_SECRET_KEY=sua-chave-secreta-forte
+GIV-Saúde_SECRET_KEY=sua-chave-secreta-forte
 APP_SECRET_KEY=sua-chave-secreta-app
-GIV_ACCESS_TOKEN_EXPIRE=30
+GIV-Saúde_ACCESS_TOKEN_EXPIRE=30
 
 # Configurações de ambiente
 ENVIRONMENT=development
@@ -271,7 +271,7 @@ LOG_LEVEL=INFO
 ### **Logs e Debug**
 ```bash
 # Executar com logs detalhados
-python api_giv_completa.py --log-level debug
+python api_GIV-Saúde_completa.py --log-level debug
 ```
 
 ---
