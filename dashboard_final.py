@@ -1349,16 +1349,16 @@ async def dashboard(
                     <h6><i class="fas fa-chart-line me-2"></i>Performance do Modelo de Machine Learning</h6>
                     <div class="row">
                         <div class="col-md-3">
-                            <strong>Acurácia:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('acuracia', 0))}%
+                            <strong>Acurácia:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('acuracia', 0) * 100)}%
                         </div>
                         <div class="col-md-3">
-                            <strong>Precisão:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('precisao', 0))}%
+                            <strong>Precisão:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('precisao', 0) * 100)}%
                         </div>
                         <div class="col-md-3">
-                            <strong>Recall:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('recall', 0))}%
+                            <strong>Recall:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('recall', 0) * 100)}%
                         </div>
                         <div class="col-md-3">
-                            <strong>F1-Score:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('f1_score', 0))}%
+                            <strong>F1-Score:</strong> {formatar_numero_br(predicao_sem_agendamento.get('modelo_metricas', {}).get('f1_score', 0) * 100)}%
                         </div>
                     </div>
                     <small class="text-muted mt-2 d-block">
@@ -1462,7 +1462,7 @@ async def dashboard(
                                 <td><strong>{esp['procedimento_especialidade']}</strong></td>
                                 <td>{formatar_numero_br(esp['total'])}</td>
                                 <td>
-                                    {f"{formatar_numero_br(esp.get('prob_media', 0))}%" if predicao_sem_agendamento.get('usa_ml') else f"{formatar_numero_br(esp.get('criticos', 0))}"}
+                                    {f"{formatar_numero_br(esp.get('prob_media', 0) * 100)}%" if predicao_sem_agendamento.get('usa_ml') else f"{formatar_numero_br(esp.get('criticos', 0))}"}
                                 </td>
                                 <td>{formatar_numero_br(esp.get('alto_risco_count', esp.get('criticos', 0)))}</td>
                                 <td>
@@ -1494,7 +1494,7 @@ async def dashboard(
                         <li><strong>Random Forest Classifier</strong> com 100 árvores de decisão</li>
                         <li>Treinado com {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['total_treino'])} amostras</li>
                         <li>Validado com {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['total_teste'])} amostras</li>
-                        <li>Acurácia: {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['acuracia'])}%</li>
+                        <li>Acurácia: {formatar_numero_br(predicao_sem_agendamento['modelo_metricas']['acuracia'] * 100)}%</li>
                     </ul>
                     
                     <h6 class="text-primary">🔍 Features Utilizadas</h6>
