@@ -51,7 +51,7 @@ python --version
 ### **Dependências Principais**
 ```bash
 # API GIV-Saúde Completa (FastAPI)
-pip install -r requirements_api_GIV-Saúde.txt
+pip install -r requirements_api_giv.txt
 
 # Dashboard Web (FastAPI)
 pip install -r requirements_otimizado.txt
@@ -94,10 +94,10 @@ GIV-Saúde_ACCESS_TOKEN_EXPIRE=30
 
 ```bash
 # Executar diretamente
-python api_GIV-Saúde_completa.py
+python api_giv_completa.py
 
 # Ou usar o script de inicialização
-INICIAR_API_GIV-Saúde.bat
+INICIAR_API_GIV.bat
 ```
 
 **Tecnologia:** FastAPI + Uvicorn  
@@ -145,7 +145,7 @@ python app.py
 │   ├── 📄 *.parquet           # Arquivos de dados
 │   └── 📄 DOCUMENTACAO_CAMPOS_TABELAS.md
 ├── 📁 static/                  # 🎨 Arquivos estáticos
-├── 📄 api_GIV-Saúde_completa.py     # 🚀 API REST FastAPI (principal)
+├── 📄 api_giv_completa.py     # 🚀 API REST FastAPI (principal)
 ├── 📄 dashboard_final.py      # 📊 Dashboard FastAPI
 ├── 📄 modelo_ml_saude.py      # 🤖 Modelo de ML
 ├── 📄 app.py                  # 🔧 API Flask (legado)
@@ -271,7 +271,7 @@ LOG_LEVEL=INFO
 ### **Logs e Debug**
 ```bash
 # Executar com logs detalhados
-python api_GIV-Saúde_completa.py --log-level debug
+python api_giv_completa.py --log-level debug
 ```
 
 ---

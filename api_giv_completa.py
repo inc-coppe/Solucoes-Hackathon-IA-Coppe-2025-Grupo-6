@@ -488,8 +488,8 @@ async def root():
                 
                 <p style="margin-top: 30px; color: #7f8c8d;">
                     <strong>Versão:</strong> 1.0.0 | 
-                    <strong>Autor:</strong> Sistema GIV | 
-                    <strong>Data:</strong> Janeiro 2025
+                    <strong>Autor:</strong> Sistema GIV-Saúde | 
+                    <strong>Data:</strong> Outubro 2025
                 </p>
             </div>
         </body>
@@ -879,14 +879,14 @@ async def fazer_predicao_ml(
     """Fazer predição ML personalizada"""
     try:
         # Validar dados de entrada
-        campos_obrigatorios = ["solicitacao_risco", "procedimento_especialidade", "paciente_faixa_etaria"]
+        campos_obrigatorios = ["risco", "especialidade", "faixa_etaria"]
         for campo in campos_obrigatorios:
             if campo not in dados:
                 raise HTTPException(status_code=400, detail=f"Campo obrigatório ausente: {campo}")
         
-        # Criar DataFrame temporário para predição
+                # Criar DataFrame temporário para predição
         df_temp = pl.DataFrame([dados])
-        
+       
         # Treinar modelo se necessário
         if not modelo_global.treinado:
             df_completo = carregar_dados()
@@ -894,7 +894,7 @@ async def fazer_predicao_ml(
         
         # Fazer predição
         df_pred = modelo_global.predizer_agravamentos(df_temp)
-        
+
         resultado = df_pred.to_dicts()[0]
         
         return {
